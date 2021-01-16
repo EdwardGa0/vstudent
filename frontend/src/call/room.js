@@ -37,7 +37,9 @@ export default class room extends Component {
 
 
     const url = "http://localhost:5000/generate/";
-    fetch(url).then(response => response.json()).then(json => this.setState({sessionInfo: json}));
+    fetch(url).then(response => response.json()).then(json => this.setState({sessionInfo: json})).catch(function(error) {
+      console.log('Request failed', error)
+  });
     console.log(this.state.sessionInfo);
   }
 
