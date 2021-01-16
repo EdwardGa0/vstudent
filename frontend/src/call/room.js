@@ -8,9 +8,16 @@ export default class room extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
+      sessionInfo: null,
       error: null,
       connected: false,
     };
+
+    this.subscriberProperties = {
+      audioVolume: 1
+    };
+
     this.sessionEvents = {
       sessionConnected: () => {
         this.setState({ connected: true });
@@ -25,12 +32,25 @@ export default class room extends Component {
     this.setState({ error: `Failed to connect: ${err.message}` });
   };
 
+  async componentDidMount() {
+    let headers = new Headers();
+
+
+    const url = "http://localhost:5000/generate/";
+    fetch(url).then(response => response.json()).then(json => this.setState({sessionInfo: json}));
+    console.log(this.state.sessionInfo);
+  }
+
   render() {
+    if (!this.state.sessionInfo) {
+      return <div>Error with session retrieval</div>
+    }
+
     return (
       <OTSession
-        apiKey={this.props.apiKey}
-        sessionId={this.props.sessionId}
-        token={this.props.token}
+        apiKey={this.state.sessionInfo.apiKey}
+        sessionId={this.state.sessionInfo.sessionId}
+        token={this.state.sessionInfo.token}
         eventHandlers={this.sessionEvents}
         onError={this.onError}
       >
@@ -38,7 +58,7 @@ export default class room extends Component {
         <ConnectionStatus connected={this.state.connected} />
         <Publisher />
         <OTStreams>
-          <Subscriber />
+          <Subscriber properties={this.subscriberProperties}/>
         </OTStreams>
       </OTSession>
     );

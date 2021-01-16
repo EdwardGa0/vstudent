@@ -3,6 +3,8 @@ import Home from "./home/home.js";
 import Room from "./call/room.js";
 import config from "./config";
 
+
+
 function App() {
   return (
     <Router>
@@ -13,11 +15,7 @@ function App() {
         <Route path="/login">{/* login page */}</Route>
         {/* temporary path */}
         <Route path="/room">
-          <Room
-            apiKey={config.API_KEY}
-            sessionId={config.SESSION_ID}
-            token={config.TOKEN}
-          />
+          <Room />
         </Route>
       </Switch>
     </Router>
