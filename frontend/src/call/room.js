@@ -15,10 +15,6 @@ export default class room extends Component {
       volume: 10
     };
 
-    this.subscriberProperties = {
-      audioVolume: this.state.volume
-    };
-
     this.sessionEvents = {
       sessionConnected: () => {
         this.setState({ connected: true });
@@ -34,15 +30,17 @@ export default class room extends Component {
   };
 
   onclick(type){
-    this.setState(prevState => {
+    this.setState(function(prevState) {
        return {volume: type === 'add' ? prevState.volume + 10: prevState.volume - 10}
     });
   }
 
   async componentDidMount() {
+    
     const url = "https://vstudent-server.herokuapp.com/generate";
     fetch(url).then(response => response.json()).then(json => this.setState({sessionCredentials: json})).catch(function(error) {
       console.log('Request failed', error)});
+
   }
 
   render() {
@@ -67,7 +65,7 @@ export default class room extends Component {
           <ConnectionStatus connected={this.state.connected} />
           <Publisher />
           <OTStreams>
-            <OTSubscriber properties={this.subscriberProperties}/>
+            <Subscriber volume={this.state.volume}/>
           </OTStreams>
         </OTSession>
       </div>
