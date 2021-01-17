@@ -1,6 +1,8 @@
 import React from "react";
 import { OTPublisher } from "opentok-react";
 import CheckBox from "./CheckBox";
+import App from "../App";
+import "../App.css";
 
 class Publisher extends React.Component {
   constructor(props) {
@@ -34,7 +36,7 @@ class Publisher extends React.Component {
   render() {
     return (
       <div className="publisher">
-        Publisher
+        <h1>Host</h1>
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
         <OTPublisher
           properties={{

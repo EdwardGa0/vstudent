@@ -53,10 +53,17 @@ export default class room extends Component {
         >
           {this.state.error ? <div id="error">{this.state.error}</div> : null}
           <ConnectionStatus connected={this.state.connected} />
-          <Publisher />
-          <OTStreams>
-            <Subscriber volume={this.state.volume}/>
-          </OTStreams>
+          
+          <div className="screens">
+            <Publisher />
+            <OTStreams>
+              
+                <Subscriber volume={this.state.volume}/>
+              
+            </OTStreams>
+          </div>
+          
+          
         </OTSession>
       </div>
     );

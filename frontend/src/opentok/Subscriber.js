@@ -1,6 +1,8 @@
 import React from "react";
 import { OTSubscriber } from "opentok-react";
 import CheckBox from "./CheckBox";
+import "../App.css";
+import Button from '@material-ui/core/Button';
 
 class Subscriber extends React.Component {
   constructor(props) {
@@ -68,7 +70,10 @@ class Subscriber extends React.Component {
   render() {
     return (
       <div className="subscriber">
-        <input type="button" onClick={this.handleClick} value={this.state.focused ? "Unfocus me" : "Focus on me"}/>
+        <Button variant="contained" color="primary" onClick={this.handleClick}>
+          {this.state.focused ? "Unfocus me" : "Focus on me"}
+        </Button>
+        
         Subscriber
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
         <OTSubscriber

@@ -4,7 +4,6 @@ import Room from "./call/room.js";
 import config from "./config";
 
 
-
 function App() {
   return (
     <Router>
