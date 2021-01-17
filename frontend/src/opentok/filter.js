@@ -11,7 +11,7 @@ function invert(imgData) {
 }
 
 export function getFilteredCanvas(mediaStream) {
-  console.log("1");
+  console.log("OK");
   var WIDTH = 640;
   var HEIGHT = 480;
   var videoEl = document.createElement("video");
