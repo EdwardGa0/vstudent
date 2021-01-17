@@ -1,18 +1,15 @@
 import React from "react";
-import App from "../App";
 import Button from "./Button";
 
 function Header() {
     return (
         <header
             style={{
-                backgroundColor: "black",
                 marginBottom: `1.45rem`,
             }}
         >
             <div
                 style={{
-                    margin: `0 auto`,
                     maxWidth: 960,
                     padding: `1.45rem 1.0875rem`,
                     display: "flex",
@@ -24,7 +21,7 @@ function Header() {
             >
                 <div
                     style={{
-                        color: "white",
+                        color: "black",
                         fontSize: "36px",
                     }}
                 >
@@ -40,7 +37,7 @@ function Header() {
                 </div>
                 <div
                     style={{
-                        color: "white",
+                        color: "black",
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "space-between",
@@ -48,10 +45,7 @@ function Header() {
                         marginTop: 13,
                     }}
                 >
-                    <h1>udent</h1>
-                </div>
-                <div>
-                    <Button text="New"></Button>
+                    <h1>tudent</h1>
                 </div>
                 <br />
             </div>
