@@ -1,8 +1,10 @@
 import React from "react";
 import { OTPublisher } from "opentok-react";
-import CheckBox from "./CheckBox";
+import CheckBox from "./CheckBox"
 import App from "../App";
 import "../App.css";
+import { getFilteredCanvas } from "./filter";
+const OT = require("@opentok/client");
 
 class Publisher extends React.Component {
   constructor(props) {
@@ -11,7 +13,7 @@ class Publisher extends React.Component {
       error: null,
       audio: true,
       video: true,
-      videoSource: "camera",
+      filteredCanvasLoaded: false,
     };
   }
 
@@ -33,20 +35,34 @@ class Publisher extends React.Component {
     this.setState({ error: `Failed to publish: ${err.message}` });
   };
 
+  componentDidMount() {
+    var that = this;
+    OT.getUserMedia().then(function gotMedia(mediaStream) {
+      console.log(mediaStream);
+      that.setState({
+        filteredCanvas: getFilteredCanvas(mediaStream),
+        filteredCanvasLoaded: true,
+      });
+    });
+  }
+
   render() {
     return (
       <div className="publisher">
         <h1>Host</h1>
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
-        <OTPublisher
-          properties={{
-            publishAudio: this.state.audio,
-            publishVideo: this.state.video,
-            videoSource:
-              this.state.videoSource === "screen" ? "screen" : undefined,
-          }}
-          onError={this.onError}
-        />
+        {this.state.filteredCanvasLoaded && (
+          <OTPublisher
+            properties={{
+              publishAudio: this.state.audio,
+              publishVideo: this.state.video,
+              videoSource: this.state.filteredCanvas.canvas
+                .captureStream(30)
+                .getVideoTracks()[0],
+            }}
+            onError={this.onError}
+          />
+        )}
         <CheckBox label="Share Screen" onChange={this.changeVideoSource} />
         <CheckBox
           label="Publish Audio"
