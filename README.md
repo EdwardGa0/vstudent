@@ -4,5 +4,7 @@ VStudent is a new way to create a classroom environment online with abilites to 
 
 If you want to try it out for yourself: [VStudent](https://vstudent-client.herokuapp.com/)
 
+The main code is within the temp branch
+
 This is a temporary README and more will be added later
 
