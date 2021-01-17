@@ -7,6 +7,8 @@ const opentok = new OpenTok(process.env.API_KEY, process.env.API_SECRET);
 
 app.use(cors());
 
+
+
 // Create a session and store it in the express app
 opentok.createSession(function(err, session) {
   if (err) throw err;
