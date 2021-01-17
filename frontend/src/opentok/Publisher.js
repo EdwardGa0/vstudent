@@ -13,7 +13,7 @@ class Publisher extends React.Component {
             error: null,
             audio: false,
             video: false,
-            filteredCanvasLoaded: false,
+            videoSource: "camera"
         };
     }
 
@@ -59,6 +59,7 @@ class Publisher extends React.Component {
                     properties={{
                         publishAudio: this.state.audio,
                         publishVideo: this.state.video,
+                        videoSource: this.state.videoSource === 'screen' ? 'screen' : undefined
                         //videoSource: this.state.filteredCanvas.canvas
                         //.captureStream(30)
                         //.getVideoTracks()[0],
