@@ -1,11 +1,12 @@
 import React from "react";
-import Button from "./Button";
+import { Link } from "react-router-dom";
 
 function Header() {
     return (
-        <header
+        <Link
+            to=""
             style={{
-                marginBottom: `1.45rem`,
+                textDecoration: "none",
             }}
         >
             <div
@@ -49,7 +50,7 @@ function Header() {
                 </div>
                 <br />
             </div>
-        </header>
+        </Link>
     );
 }
 

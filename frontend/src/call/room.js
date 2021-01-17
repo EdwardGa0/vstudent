@@ -46,7 +46,12 @@ export default class room extends Component {
         }
 
         return (
-            <div>
+            <div
+                style={{
+                    background: "#fce5d9",
+                    minHeight: "100vh",
+                }}
+            >
                 <Header></Header>
                 <OTSession
                     apiKey={this.state.sessionCredentials.apiKey}
