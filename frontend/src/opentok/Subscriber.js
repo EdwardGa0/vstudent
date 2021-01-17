@@ -12,10 +12,9 @@ class Subscriber extends React.Component {
       video: true,
       volume: this.props.volume,
       subscriber: null,
-      value: '',
       focused: false
     };
-    this.onChange = this.onChange.bind(this)
+    //this.onChange = this.onChange.bind(this)
     this.handleClick = this.handleClick.bind(this);
     this.otSubscriber = React.createRef();
   }
@@ -32,13 +31,13 @@ class Subscriber extends React.Component {
     this.setState({ error: `Failed to subscribe: ${err.message}` });
   };
 
-  onChange(e){
-    const re = /^[0-99\b]+$/;
-    if (e.target.value === '' || re.test(e.target.value)) {
-       this.setState({value: e.target.value})
-       this.otSubscriber.current.state.subscriber.setAudioVolume(parseInt(e.target.value));
-    }
-  }
+  // onChange(e){
+  //   const re = /^[0-99\b]+$/;
+  //   if (e.target.value === '' || re.test(e.target.value)) {
+  //      this.setState({value: e.target.value})
+  //      this.otSubscriber.current.state.subscriber.setAudioVolume(parseInt(e.target.value));
+  //   }
+  // }
 
   handleClick() {
     console.log(this);
@@ -69,7 +68,6 @@ class Subscriber extends React.Component {
   render() {
     return (
       <div className="subscriber">
-        <input value={this.state.value} onChange={this.onChange}/>
         <input type="button" onClick={this.handleClick} value={this.state.focused ? "Unfocus me" : "Focus on me"}/>
         Subscriber
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
