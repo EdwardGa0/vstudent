@@ -1,6 +1,7 @@
 import React from "react";
 import { OTPublisher } from "opentok-react";
 import CheckBox from "./CheckBox";
+import { getFilteredCanvas } from "./filter.js"
 
 class Publisher extends React.Component {
   constructor(props) {
@@ -8,9 +9,14 @@ class Publisher extends React.Component {
     this.state = {
       error: null,
       audio: true,
-      video: true,
-      videoSource: "camera",
+      video: true
     };
+    const OT = require('@opentok/client');
+    console.log('asdf');
+    OT.getUserMedia().then(function gotMedia(mediaStream) {
+      console.log('qwer');
+      this.state.filteredCanvas = getFilteredCanvas(mediaStream);
+    });
   }
 
   setAudio = (audio) => {
@@ -36,12 +42,12 @@ class Publisher extends React.Component {
       <div className="publisher">
         Publisher
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
+        
         <OTPublisher
           properties={{
             publishAudio: this.state.audio,
             publishVideo: this.state.video,
-            videoSource:
-              this.state.videoSource === "screen" ? "screen" : undefined,
+            videoSource:  this.state.filteredCanvas.canvas.captureStream(30).getVideoTracks()[0]
           }}
           onError={this.onError}
         />
