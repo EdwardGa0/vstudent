@@ -12,9 +12,11 @@ class Subscriber extends React.Component {
       video: true,
       volume: this.props.volume,
       subscriber: null,
-      value: ''
+      value: '',
+      focused: false
     };
     this.onChange = this.onChange.bind(this)
+    this.handleClick = this.handleClick.bind(this);
     this.otSubscriber = React.createRef();
   }
 
@@ -36,12 +38,24 @@ class Subscriber extends React.Component {
        this.setState({value: e.target.value})
        this.otSubscriber.current.state.subscriber.setAudioVolume(parseInt(e.target.value));
     }
- }
+  }
+
+  handleClick() {
+    console.log(this);
+    if (this.state.focused) {
+      this.setState({focused: false});
+      this.otSubscriber.current.state.subscriber.setAudioVolume(10);
+    } else {
+      this.setState({focused: true});
+      this.otSubscriber.current.state.subscriber.setAudioVolume(90);
+    }
+    
+  }
 
   componentDidMount() {
     this.getSubscriber();
     
-    console.log(this.otSubscriber.current.state.subscriber);
+    console.log(this.otSubscriber.current);
   }
 
   getSubscriber() {
@@ -56,6 +70,7 @@ class Subscriber extends React.Component {
     return (
       <div className="subscriber">
         <input value={this.state.value} onChange={this.onChange}/>
+        <input type="button" onClick={this.handleClick} value={this.state.focused ? "Unfocus me" : "Focus on me"}/>
         Subscriber
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
         <OTSubscriber
