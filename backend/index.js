@@ -5,17 +5,6 @@ const cors = require('cors');
 
 const opentok = new OpenTok(process.env.API_KEY, process.env.API_SECRET);
 
-// var whitelist = ['http://localhost:3000/']
-// var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
-
 app.use(cors());
 
 // Create a session and store it in the express app
