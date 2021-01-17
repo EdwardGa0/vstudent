@@ -37,11 +37,6 @@ body, html {
   flex-direction: row;
 }
 
-.OTStreams {
-  display: flex;
-  flex-direction: row;
-}
-
 
 #error {
   color: red;

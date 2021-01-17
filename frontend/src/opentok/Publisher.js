@@ -36,14 +36,15 @@ class Publisher extends React.Component {
   };
 
   componentDidMount() {
-    var that = this;
-    OT.getUserMedia().then(function gotMedia(mediaStream) {
-      console.log(mediaStream);
-      that.setState({
-        filteredCanvas: getFilteredCanvas(mediaStream),
-        filteredCanvasLoaded: true,
-      });
-    });
+    // var that = this;
+    // OT.getUserMedia().then(function gotMedia(mediaStream) {
+    //   console.log(mediaStream);
+    //   that.setState({
+    //     filteredCanvas: getFilteredCanvas(mediaStream),
+    //     filteredCanvasLoaded: true,
+    //   });
+    // });
+    //{this.state.filteredCanvasLoaded && (
   }
 
   render() {
@@ -51,18 +52,17 @@ class Publisher extends React.Component {
       <div className="publisher">
         <h1>Host</h1>
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
-        {this.state.filteredCanvasLoaded && (
+        
           <OTPublisher
             properties={{
               publishAudio: this.state.audio,
               publishVideo: this.state.video,
-              videoSource: this.state.filteredCanvas.canvas
-                .captureStream(30)
-                .getVideoTracks()[0],
+              //videoSource: this.state.filteredCanvas.canvas
+                //.captureStream(30)
+                //.getVideoTracks()[0],
             }}
             onError={this.onError}
           />
-        )}
         <CheckBox label="Share Screen" onChange={this.changeVideoSource} />
         <CheckBox
           label="Publish Audio"
