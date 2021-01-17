@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ConnectionStatus from "../opentok/ConnectionStatus";
 import Publisher from "../opentok/Publisher";
 import Subscriber from "../opentok/Subscriber";
-import { OTSession, OTStreams, preloadScript, OTSubscriber } from "opentok-react";
+import { OTSession, OTStreams } from "opentok-react";
 
 export default class room extends Component {
   constructor(props) {
@@ -29,12 +29,6 @@ export default class room extends Component {
     this.setState({ error: `Failed to connect: ${err.message}` });
   };
 
-  onclick(type){
-    this.setState(function(prevState) {
-       return {volume: type === 'add' ? prevState.volume + 10: prevState.volume - 10}
-    });
-  }
-
   async componentDidMount() {
     
     const url = "https://vstudent-server.herokuapp.com/generate";
@@ -50,10 +44,6 @@ export default class room extends Component {
 
     return (
       <div>
-        <div>Volume: {this.state.volume}
-          <input type='button' onClick={this.onclick.bind(this, 'add')} value='Inc'/>
-          <input type='button' onClick={this.onclick.bind(this, 'sub')} value='Dec'/>
-        </div>
         <OTSession
           apiKey={this.state.sessionCredentials.apiKey}
           sessionId={this.state.sessionCredentials.sessionId}
